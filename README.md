@@ -1,29 +1,15 @@
 # Qrier
 
-TODO: Write a gem description
+Qrier fetches and sends email. In Ruby.
 
 ## Installation
 
-Add this line to your application's Gemfile:
-
-    gem 'qrier'
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
+Install it via:
 
     $ gem install qrier
 
 ## Usage
 
-TODO: Write usage instructions here
+Run `qrier` in your terminal:
 
-## Contributing
-
-1. Fork it ( https://github.com/[my-github-username]/qrier/fork )
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Add some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create a new Pull Request
+    $ qrier
