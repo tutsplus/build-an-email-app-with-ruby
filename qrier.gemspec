@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.version       = Qrier::VERSION
   spec.authors       = ["José Mota"]
   spec.email         = ["jose@josemota.net"]
-  spec.summary       = %q{TODO: Write a short summary. Required.}
-  spec.description   = %q{TODO: Write a longer description. Optional.}
+  spec.summary       = %q{Fetch and send email.}
+  #spec.description   = %q{TODO}
   spec.homepage      = ""
   spec.license       = "MIT"
 
