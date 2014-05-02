@@ -1,0 +1,14 @@
+-
+  from:    jose@josemota.net
+  to:      amanda@tutsplus.com
+  cc:      jose@tutsplus.com
+  subject: Email from Qrier
+  body: Greetings from Qrier, thanks for taking part! -- Jose
+  sent_at: "<%= Time.now %>"
+-
+  from:    amanda@josemota.net
+  to:      jose@josemota.net
+  cc:      jose@tutsplus.com
+  subject: "Re: Email from Qrier"
+  body:    Awesome! -- Amanda
+  sent_at: "<%= Time.now %>"

@@ -1,5 +1,7 @@
-require "qrier/version"
+require 'bundler'
+Bundler.require
 
-module Qrier
-  # Your code goes here...
-end
+require 'erb'
+require 'qrier/version'
+require 'qrier/models/email'
+require 'qrier/app'

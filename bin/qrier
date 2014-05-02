@@ -1,3 +1,5 @@
 #!/usr/bin/env ruby
 
 require 'qrier'
+
+Qrier::App.start ARGV

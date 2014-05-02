@@ -6,4 +6,6 @@ Bundler.require
 require 'qrier/environment'
 Bundler.require Qrier.environment
 
+require "helpers"
+
 Minitest::Reporters.use! Minitest::Reporters::DefaultReporter.new
