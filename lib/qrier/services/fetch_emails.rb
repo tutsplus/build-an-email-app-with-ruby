@@ -7,26 +7,20 @@ module Qrier
       password = ENV['QRIER_PWD']
       raise ArgumentError, 'Please provide your email credentials.' unless user && password
 
+      @folder = Folder.new name: "INBOX"
+
       begin
         @imap = Net::IMAP.new 'mail.josemota.net'
         @imap.login user, password
 
-        fetch_emails self
+        fetch_emails @folder
       ensure
         @imap.disconnect
       end
     end
 
     def emails
-      @emails ||= []
-    end
-
-    def to_s
-      'INBOX'
-    end
-
-    def add_email email
-      emails << email
+      @folder.emails
     end
 
   end

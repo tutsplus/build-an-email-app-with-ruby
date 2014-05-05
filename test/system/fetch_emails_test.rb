@@ -1,6 +1,8 @@
 # encoding: utf-8
 require 'test_helper'
 require 'net/imap'
+require 'qrier/models/folder'
+require 'qrier/models/email'
 require 'qrier/helpers/imap_utils'
 require 'qrier/services/fetch_emails'
 
