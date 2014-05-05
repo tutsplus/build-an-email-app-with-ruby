@@ -17,7 +17,8 @@ module Qrier
     end
 
     def test_has_correct_time
-      assert_kind_of Time, @@emails.first.sent_at
+      #assert_kind_of Time, @@emails.first.sent_at
+      assert_equal 2014, @@emails.first.sent_at.year
     end
 
     def test_has_subject

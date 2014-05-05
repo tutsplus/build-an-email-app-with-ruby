@@ -24,7 +24,7 @@ module Qrier
           cc:      address(envelope.cc),
           bcc:     address(envelope.bcc),
           subject: envelope.subject,
-          sent_at: Time.new(envelope.date),
+          sent_at: Time.parse(envelope.date),
           body:    imap.fetch(id, 'BODY[TEXT]')[0].attr['BODY[TEXT]'].force_encoding('utf-8'),
           new?:    !flags.include?(:Seen)
         )
