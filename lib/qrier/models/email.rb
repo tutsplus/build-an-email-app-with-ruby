@@ -11,11 +11,18 @@ module Qrier
       @subject = options[:subject]
       @sent_at = options[:sent_at]
 
+      @flags = []
+      @flags << :new if options[:new?]
+
       # @folder?
     end
 
     def self.all
       
+    end
+
+    def new?
+      @flags.include? :new
     end
   end
 end
