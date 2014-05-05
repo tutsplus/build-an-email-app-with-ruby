@@ -8,4 +8,5 @@ gemspec
 group :test do
   gem 'minitest', require: 'minitest/autorun'
   gem 'minitest-reporters', require: 'minitest/reporters'
+  gem 'pry'
 end
