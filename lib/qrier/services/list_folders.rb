@@ -1,15 +1,15 @@
 module Qrier
   class ListFolders
-    attr_reader :folders
-
-    def folders
-      @folders ||= []
-    end
+    include IMAPUtils
 
     def execute
+      user = ENV['QRIER_USER']
+      password = ENV['QRIER_PWD']
+      raise ArgumentError, "Please provide your email credentials." unless user && password
+
       begin
         imap = Net::IMAP.new 'mail.josemota.net'
-        imap.login ENV['QRIER_USER'], ENV['QRIER_PWD']
+        imap.login user, password
         list = imap.list "*", "*"
         list.each do |item|
           folder = Folder.new name: item.name
@@ -39,8 +39,9 @@ module Qrier
       end
     end
 
-    def address field
-      field ? [ field.first.mailbox, '@', field.first.host ].join : nil
+    def folders
+      @folders ||= []
     end
+
   end
 end

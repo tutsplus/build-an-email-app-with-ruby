@@ -1,7 +1,8 @@
 # encoding: utf-8
-require "test_helper"
+require 'test_helper'
 require 'net/imap'
-require "qrier/services/fetch_emails"
+require 'qrier/helpers/imap_utils'
+require 'qrier/services/fetch_emails'
 
 module Qrier
   class FetchEmailsTest < Minitest::Test
@@ -18,15 +19,15 @@ module Qrier
     end
 
     def test_has_subject
-      assert_equal "First email ever!", @@emails.first.subject
+      assert_equal 'First email ever!', @@emails.first.subject
     end
 
     def test_has_correct_encoding
-      assert_includes @@emails.first.body, "José Mota"
+      assert_includes @@emails.first.body, 'José Mota'
     end
 
     def test_it_is_new
-      assert @@emails.first.new?, "Expected email to be new."
+      assert @@emails.first.new?, 'Expected email to be new.'
     end
   end
 end

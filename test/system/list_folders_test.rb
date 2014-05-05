@@ -1,5 +1,6 @@
 require 'test_helper'
 require 'qrier/models/folder'
+require 'qrier/helpers/imap_utils'
 require 'qrier/services/list_folders'
 
 module Qrier

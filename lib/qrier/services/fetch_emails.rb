@@ -1,8 +1,6 @@
 module Qrier
   class FetchEmails
-    def emails
-      @emails ||= []
-    end
+    include IMAPUtils
 
     def execute
       user = ENV['QRIER_USER']
@@ -18,7 +16,7 @@ module Qrier
           uid = imap.fetch id, 'UID'
           flags = imap.fetch id, 'FLAGS'
 
-          emails << Email.new(
+          add_email Email.new(
             from:    address(envelope.from),
             to:      address(envelope.to),
             cc:      address(envelope.cc),
@@ -34,8 +32,13 @@ module Qrier
       end
     end
 
-    def address field
-      field ? [ field.first.mailbox, '@', field.first.host ].join : nil
+    def emails
+      @emails ||= []
     end
+
+    def add_email email
+      emails << email
+    end
+
   end
 end
