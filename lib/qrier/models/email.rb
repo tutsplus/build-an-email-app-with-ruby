@@ -20,5 +20,9 @@ module Qrier
     def new?
       @flags.include? :new
     end
+
+    def update_timestamp
+      @sent_at = Time.now
+    end
   end
 end
