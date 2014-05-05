@@ -10,9 +10,8 @@ module Qrier
       raise ArgumentError, "Please provide your email credentials." unless user && password
 
       begin
-
         imap = Net::IMAP.new 'mail.josemota.net'
-        imap.authenticate 'login', user, password
+        imap.login user, password
         imap.examine 'INBOX'
         imap.search(['ALL']).each do |id|
           envelope = imap.fetch(id, 'ENVELOPE')[0].attr['ENVELOPE']
