@@ -1,6 +1,12 @@
 All emails
 
-<% @emails.each do |email| %>
-From: <%= email.from %>
-To: <%= email.to %>
-<% end %>
+<% @folders.each do |folder| %>
+<%= folder.name.colorize :green %>
+<%= ('=' * folder.name.size).colorize :green %>
+<% if folder.emails.empty? %>
+<%= "No emails for this mailbox.".colorize :magenta %>
+<% end %><% folder.emails.each do |email| %>
+<% if email.new? %><%= 'NEW'.colorize(background: :red) %> <% end %>From: <%= email.from.colorize :blue %> | To: <%= email.to.colorize :yellow %>
+Subject: <%= email.subject %> | Sent: <%= email.sent_at %>
+* * *
+<%= email.body %><% end %><% end %>
