@@ -32,7 +32,7 @@ module Qrier
           )
         end
       ensure
-        imap.close
+        imap.disconnect
       end
     end
 

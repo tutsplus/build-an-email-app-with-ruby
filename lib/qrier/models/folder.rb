@@ -10,6 +10,10 @@ module Qrier
       @emails ||= []
     end
 
+    def to_s
+      name
+    end
+
     def add_email email
       emails << email
     end
