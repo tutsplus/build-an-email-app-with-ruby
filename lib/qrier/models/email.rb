@@ -17,10 +17,6 @@ module Qrier
       # @folder?
     end
 
-    def self.all
-      
-    end
-
     def new?
       @flags.include? :new
     end

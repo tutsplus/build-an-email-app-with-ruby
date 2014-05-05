@@ -4,7 +4,11 @@ module Qrier
 
     desc :list, "Lists emails"
     def list
-      @emails = Email.all
+      service = ListFolders.new
+      service.execute
+
+      @folders = service.folders
+
       render :list
     end
 
