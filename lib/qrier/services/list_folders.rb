@@ -3,9 +3,9 @@ module Qrier
     include IMAPUtils
 
     def execute
-      user = ENV['QRIER_USER']
-      password = ENV['QRIER_PWD']
-      server = 'mail.josemota.net'
+      user = Config::USER
+      password = Config::PASSWORD
+      server = Config::IMAP_SERVER
       raise ArgumentError, 'Please provide your email credentials.' unless user && password
 
       begin
