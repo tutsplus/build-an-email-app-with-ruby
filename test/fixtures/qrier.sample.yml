@@ -1,0 +1,4 @@
+user: yourname@yourdomain.com
+password: yourpassword
+imap_server: imap.yourdomain.com
+smtp_server: smtp.yourdomain.com
