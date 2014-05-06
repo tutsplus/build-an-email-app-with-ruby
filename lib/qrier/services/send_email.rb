@@ -2,9 +2,11 @@ module Qrier
   class SendEmail
     attr_reader :email
     def initialize email_data
-      @server = 'mail.josemota.net'
-      @user = ENV['QRIER_USER']
-      @password = ENV['QRIER_PWD']
+      @smtp_server = Config::SMTP_SERVER
+      @imap_server = Config::IMAP_SERVER
+      @user = Config::USER
+      @password = Config::PASSWORD
+      @sent_folder = Config::SENT_FOLDER
 
       setup_email email_data
     end
@@ -12,8 +14,8 @@ module Qrier
     def execute
       add_metadata_to_email
 
-      smtp = Net::SMTP.new @server
-      smtp.start @server, @user, @password, :login
+      smtp = Net::SMTP.new @smtp_server
+      smtp.start @smtp_server, @user, @password, :login
       smtp.send_message message, email.from, email.to
       smtp.finish
 
@@ -28,10 +30,10 @@ module Qrier
     end
 
     def store_mail
-      imap = Net::IMAP.new 'mail.josemota.net'
+      imap = Net::IMAP.new @imap_server
       imap.login @user, @password
 
-      imap.append 'INBOX.Sent', <<EOF.gsub("\n", "\r\n"), [:Seen], Time.now
+      imap.append @sent_folder, <<EOF.gsub("\n", "\r\n"), [:Seen], Time.now
 Subject: #{@email.subject}
 From: #{@email.from}
 To: #{@email.to.join ', '}
