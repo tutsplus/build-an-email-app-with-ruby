@@ -18,6 +18,8 @@ module Qrier
         uid      = imap.fetch id, 'UID'
         flags    = imap.fetch id, 'FLAGS'
 
+        #binding.pry
+
         recipient.add_email Email.new(
           from:    address(envelope.from),
           to:      address(envelope.to),

@@ -28,5 +28,10 @@ module Qrier
       @folders ||= []
     end
 
+    def clean
+      @folders.clear
+      self
+    end
+
   end
 end

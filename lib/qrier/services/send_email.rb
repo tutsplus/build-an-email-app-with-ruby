@@ -10,14 +10,14 @@ module Qrier
     end
 
     def execute
-      smtp = Net::SMTP.new @server
+      add_metadata_to_email
 
+      smtp = Net::SMTP.new @server
       smtp.start @server, @user, @password, :login
       smtp.send_message message, email.from, email.to
-
-      add_metadata_to_email
-    ensure
       smtp.finish
+
+      store_mail
     end
 
     private
@@ -25,6 +25,22 @@ module Qrier
     def setup_email data
       data = data.merge({ from: @user })
       @email = Email.new data
+    end
+
+    def store_mail
+      imap = Net::IMAP.new 'mail.josemota.net'
+      imap.login @user, @password
+
+      imap.append 'INBOX.Sent', <<EOF.gsub("\n", "\r\n"), [:Seen], Time.now
+Subject: #{@email.subject}
+From: #{@email.from}
+To: #{@email.to.join ', '}
+Date: #{@email.sent_at}
+
+#{@email.body}
+EOF
+      ensure
+        imap.disconnect
     end
 
     def add_metadata_to_email
@@ -36,6 +52,7 @@ module Qrier
 From: #{email.from}
 To: #{email.to.join ', '}
 Subject: #{email.subject}
+Date: #{email.sent_at}
 
 #{email.body}
 EOF
