@@ -37,6 +37,41 @@ module Qrier
       end
     end
 
+    desc :reply, 'Reply to an email.'
+    def reply previous_message_id
+      service = FetchEmails.new
+      service.execute
+
+      previous_email = service.emails.find { |email| email.message_id == previous_message_id }
+
+      unless previous_email
+        puts 'Invalid message id. Please use the `list` command to list your emails. Exiting.'
+        exit 1
+      end
+
+      puts "Replying to #{previous_email.from}."
+
+      subject = ask("Subject? (default: RE: #{previous_email.subject}) ") do |q|
+        q.default = "RE: #{previous_email.subject}"
+      end
+
+      ask <<EOF
+Please write the email's body into draft.txt. After that,
+press Enter so it can be read and put into the email:
+EOF
+
+      send_service = SendEmail.new({
+        to: [ previous_email.from ],
+        subject: subject,
+        body: File.read(File.join(Dir.pwd, 'draft.txt')),
+      })
+
+      send_service.execute
+
+      puts "Email was sent."
+
+    end
+
     private
 
     def render path
