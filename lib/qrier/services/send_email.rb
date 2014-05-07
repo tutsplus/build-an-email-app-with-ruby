@@ -33,14 +33,7 @@ module Qrier
       imap = Net::IMAP.new @imap_server
       imap.login @user, @password
 
-      imap.append @sent_folder, <<EOF.gsub("\n", "\r\n"), [:Seen], Time.now
-Subject: #{@email.subject}
-From: #{@email.from}
-To: #{@email.to.join ', '}
-Date: #{@email.sent_at}
-
-#{@email.body}
-EOF
+      imap.append @sent_folder, message, [:Seen], Time.now
       ensure
         imap.disconnect
     end
@@ -50,7 +43,7 @@ EOF
     end
 
     def message
-      <<EOF
+      string = <<EOF
 From: #{email.from}
 To: #{email.to.join ', '}
 Subject: #{email.subject}
@@ -58,6 +51,8 @@ Date: #{email.sent_at}
 
 #{email.body}
 EOF
+
+    string.gsub("\n", "\r\n")
     end
   end
 end
