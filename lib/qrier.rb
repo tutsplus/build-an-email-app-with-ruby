@@ -5,9 +5,12 @@ require 'erb'
 require 'net/imap'
 require 'net/smtp'
 require 'qrier/version'
+require 'qrier/config'
 require 'qrier/helpers/imap_utils'
 require 'qrier/services/fetch_emails'
 require 'qrier/services/list_folders'
 require 'qrier/models/email'
 require 'qrier/models/folder'
 require 'qrier/app'
+
+Qrier::Config.load
