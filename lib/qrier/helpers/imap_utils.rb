@@ -15,20 +15,20 @@ module Qrier
       imap.examine recipient.to_s
       imap.search(['ALL']).each do |id|
         envelope = imap.fetch(id, 'ENVELOPE')[0].attr['ENVELOPE']
-        uid      = imap.fetch id, 'UID'
+        uid      = imap.fetch(id, 'UID')[0].attr['UID']
         flags    = imap.fetch id, 'FLAGS'
 
-        #binding.pry
-
         recipient.add_email Email.new(
-          from:    address(envelope.from),
-          to:      address(envelope.to),
-          cc:      address(envelope.cc),
-          bcc:     address(envelope.bcc),
-          subject: envelope.subject,
-          sent_at: Time.parse(envelope.date),
-          body:    imap.fetch(id, 'BODY[TEXT]')[0].attr['BODY[TEXT]'].force_encoding('utf-8'),
-          new?:    !flags.include?(:Seen)
+          from:       address(envelope.from),
+          to:         address(envelope.to),
+          cc:         address(envelope.cc),
+          bcc:        address(envelope.bcc),
+          subject:    envelope.subject,
+          sent_at:    Time.parse(envelope.date),
+          body:       imap.fetch(id, 'BODY[TEXT]')[0].attr['BODY[TEXT]'].force_encoding('utf-8'),
+          new?:       !flags.include?(:Seen),
+          uid:        uid,
+          message_id: envelope.message_id
         )
       end
     end

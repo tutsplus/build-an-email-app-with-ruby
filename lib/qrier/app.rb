@@ -9,7 +9,7 @@ module Qrier
 
       @folders = service.folders
 
-      render :list
+      FolderRenderer.new(@folders).render
     end
 
     desc :send, 'Sends an email.'

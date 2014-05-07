@@ -4,6 +4,7 @@ source 'https://rubygems.org'
 gem 'thor'
 gem 'colorize'
 gem 'highline', require: 'highline/import'
+gem 'formatador'
 
 gemspec
 

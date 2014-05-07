@@ -32,5 +32,9 @@ module Qrier
     def test_it_is_new
       assert @@emails.first.new?, 'Expected email to be new.'
     end
+
+    def test_emails_have_uids
+      assert_equal 1, @@emails.first.uid
+    end
   end
 end

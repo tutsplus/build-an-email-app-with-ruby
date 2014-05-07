@@ -40,6 +40,7 @@ module Qrier
 
     def add_metadata_to_email
       email.update_timestamp
+      email.set_message_id
     end
 
     def message
@@ -48,6 +49,7 @@ From: #{email.from}
 To: #{email.to.join ', '}
 Subject: #{email.subject}
 Date: #{email.sent_at}
+Message-ID: #{email.message_id}
 
 #{email.body}
 EOF
