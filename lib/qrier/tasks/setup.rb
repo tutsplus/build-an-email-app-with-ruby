@@ -6,6 +6,8 @@ module Qrier
       load_config
       ask_for_sent_folder
       save # in order to store the sent folder
+
+      say "You have successfully configured Qrier. Try and run `qrier list`."
     end
 
     private
@@ -22,9 +24,12 @@ module Qrier
       service = ListFolders.new
       service.execute
 
-      folders = service.folders.map(&:name)
-      say folders.join "\n"
-      @sent_folder = ask 'Select your sent folder: ', folders
+      folders = service.folders
+      folders.each_index do |index|
+        say "#{index}. #{folders[index].name}"
+      end
+      index = ask 'Select your sent folder: '
+      @sent_folder = folders[index.to_i]
     end
 
     def save
