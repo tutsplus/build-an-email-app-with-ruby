@@ -1,3 +1,5 @@
+require "highline/import"
+
 module Qrier
   class App < Thor
     TEMPLATE_PATH = File.expand_path '../templates', __FILE__
@@ -43,6 +45,11 @@ module Qrier
       service.execute
 
       puts "Email was sent."
+    end
+
+    desc :setup, 'Bootstrap configration to use with Qrier.'
+    def setup
+      Setup.new.execute
     end
 
     private
