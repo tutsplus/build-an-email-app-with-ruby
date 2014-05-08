@@ -11,5 +11,15 @@ module Qrier
       const_set(:SENT_FOLDER, yaml['sent_folder'])
     end
 
+    def self.reload
+      remove_const(:USER)
+      remove_const(:PASSWORD)
+      remove_const(:IMAP_SERVER)
+      remove_const(:SMTP_SERVER)
+      remove_const(:SENT_FOLDER)
+
+      load
+    end
+
   end
 end
